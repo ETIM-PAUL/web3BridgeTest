@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from './Modal'
 
-const Room = ({ title, type }) => {
+const Room = ({ title, type, allPersons, setAllPersons }) => {
   const [persons, setPersons] = React.useState([])
   const [modal, setModal] = React.useState(false)
 
@@ -74,7 +74,7 @@ const Room = ({ title, type }) => {
       </div>
 
       {modal &&
-        <Modal type={type} modal={modal} persons={persons} setPersons={setPersons} setModal={setModal} />
+        <Modal type={type} modal={modal} persons={persons} setPersons={setPersons} setAllPersons={setAllPersons} allPersons={allPersons} setModal={setModal} />
       }
     </div>
   )

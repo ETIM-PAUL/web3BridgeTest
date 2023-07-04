@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Modal = ({ setModal, persons, setPersons, type }) => {
+const Modal = ({ setModal, persons, setPersons, allPersons, setAllPersons, type }) => {
   const [fullName, setFullName] = React.useState("")
   const [proficiency, setProficiency] = React.useState("")
   const addPerson = () => {
@@ -23,33 +23,63 @@ const Modal = ({ setModal, persons, setPersons, type }) => {
 
     // check if room has facilitator
     const is_facilitator_present = persons.find((person) => person.proficiency === "facilitator")
+    // check if facility has exceeded capacity of facilitators
+    const max_facilitator_present = allPersons.filter((person) => person.proficiency === "facilitator")
 
     // check if room has frontend developer
     const is_frontend_present = persons.find((person) => person.proficiency === "frontend")
+    // check if facility has exceeded capacity of frontend
+    const max_frontend_present = allPersons.filter((person) => person.proficiency === "frontend")
 
     // check if room has smart contract developer
     const is_smart_contract_present = persons.find((person) => person.proficiency === "smart_contract")
+    // check if facility has exceeded capacity of smart contract
+    const max_smart_present = allPersons.filter((person) => person.proficiency === "smart_contract")
+
 
     // check if room has smart contract developer
     const is_server_side_present = persons.find((person) => person.proficiency === "server_side")
+    // check if facility has exceeded capacity of server_side
+    const max_server_side_present = allPersons.filter((person) => person.proficiency === "server_side")
 
     if (is_facilitator_present && newPerson.proficiency === "facilitator" && type === "room") {
       window.alert("This Room has a facilitator present")
       return;
     }
+    if (max_facilitator_present.length === 5 && newPerson.proficiency === "facilitator" && type === "room") {
+      window.alert("This Facility has admitted the maximum number of facilitators")
+      return;
+    }
+
     if (is_frontend_present && newPerson.proficiency === "frontend" && type === "room") {
       window.alert("This Room has a FrontEnd Developer present")
       return;
     }
+    if (max_frontend_present.length === 5 && newPerson.proficiency === "frontend" && type === "room") {
+      window.alert("This Facility has admitted the maximum number of frontend developers")
+      return;
+    }
+
     if (is_smart_contract_present && newPerson.proficiency === "smart_contract" && type === "room") {
       window.alert("This Room has a Smart Contract Developer present")
       return;
     }
+    if (max_smart_present.length === 10 && newPerson.proficiency === "smart_contract" && type === "room") {
+      window.alert("This Facility has admitted the maximum number of smart contract developers")
+      return;
+    }
+
     if (is_server_side_present && newPerson.proficiency === "server_side" && type === "room") {
       window.alert("This Room has a Server-Side Architect present")
       return;
     }
+    if (max_server_side_present.length === 5 && newPerson.proficiency === "server_side" && type === "room") {
+      window.alert("This Facility has admitted the maximum number of server-side architects")
+      return;
+    }
+
     setPersons([...persons, newPerson])
+    setAllPersons([...allPersons, newPerson])
     setModal(false)
   }
   return (
