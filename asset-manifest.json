@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/web3BridgeTest/static/css/main.44cc991b.css",
+    "main.js": "/web3BridgeTest/static/js/main.d938266a.js",
+    "index.html": "/web3BridgeTest/index.html",
+    "main.44cc991b.css.map": "/web3BridgeTest/static/css/main.44cc991b.css.map",
+    "main.d938266a.js.map": "/web3BridgeTest/static/js/main.d938266a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.44cc991b.css",
+    "static/js/main.d938266a.js"
+  ]
+}
