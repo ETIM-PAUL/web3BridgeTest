@@ -1,7 +1,9 @@
 import React from 'react'
+import Modal from './Modal'
 
 const Room = ({ title }) => {
   const [persons, setPersons] = React.useState([])
+  const [modal, setModal] = React.useState(false)
 
   return (
     <div>
@@ -23,10 +25,14 @@ const Room = ({ title }) => {
             </ul>
           </div>
           <div className="card-actions justify-center mt-3">
-            <button className="btn btn-primary">Add Person</button>
+            <button className="btn btn-primary" onClick={() => setModal(true)}>Add Person</button>
           </div>
         </div>
       </div>
+
+      {modal &&
+        <Modal modal={modal} persons={persons} setPersons={setPersons} setModal={setModal} />
+      }
     </div>
   )
 }
