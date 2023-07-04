@@ -4,7 +4,42 @@ const Modal = ({ setModal, persons, setPersons }) => {
   const [fullName, setFullName] = React.useState("")
   const [proficiency, setProficiency] = React.useState("")
   const addPerson = () => {
+    let newPerson = {
+      fullName: fullName,
+      proficiency: proficiency
+    }
 
+    // check if room has facilitator
+    const is_facilitator_present = persons.find((person) => person.proficiency === "facilitator")
+
+    // check if room has frontend developer
+    const is_frontend_present = persons.find((person) => person.proficiency === "frontend")
+
+    // check if room has smart contract developer
+    const is_smart_contract_present = persons.find((person) => person.proficiency === "smart_contract")
+
+    // check if room has smart contract developer
+    const is_server_side_present = persons.find((person) => person.proficiency === "server_side")
+
+    if (is_facilitator_present && newPerson.proficiency === "facilitator") {
+      window.alert("This Room has a facilitator present")
+      return;
+    }
+    if (is_frontend_present && newPerson.proficiency === "frontend") {
+      window.alert("This Room has a FrontEnd Developer present")
+      return;
+    }
+    if (is_smart_contract_present && newPerson.proficiency === "smart_contract") {
+      window.alert("This Room has a Smart Contract Developer present")
+      return;
+    }
+    if (is_server_side_present && newPerson.proficiency === "server_side") {
+      window.alert("This Room has a Server-Side Architect present")
+      return;
+    }
+
+    setPersons([...persons, newPerson])
+    setModal(false)
   }
   return (
     <div>
