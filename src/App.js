@@ -1,31 +1,22 @@
 import './App.css';
+import Room from './components/Room';
 
 function App() {
   return (
     <div className="App">
       <div className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <button className="btn" onClick={() => window.my_modal_1.showModal()}>open modal</button>
-        <dialog id="my_modal_1" className="modal">
-          <form method="dialog" className="modal-box">
-            <h3 className="font-bold text-lg">Hello!</h3>
-            <p className="py-4">Press ESC key or click the button below to close</p>
-            <div className="modal-action">
-              {/* if there is a button in form, it will close the modal */}
-              <button className="btn">Close</button>
-            </div>
-          </form>
-        </dialog>
+        <div className="my-10">
+          <Room title="Conference Room" />
+        </div>
+
+        <div className="flex flex-wrap gap-10 justify-center pb-10">
+          <Room title="Room 1" />
+          <Room title="Room 2" />
+          <Room title="Room 3" />
+          <Room title="Room 4" />
+          <Room title="Room 5" />
+          <Room title="Room 6" />
+        </div>
       </div>
     </div>
   );
