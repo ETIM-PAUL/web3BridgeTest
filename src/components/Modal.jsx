@@ -1,12 +1,24 @@
 import React from 'react'
 
-const Modal = ({ setModal, persons, setPersons }) => {
+const Modal = ({ setModal, persons, setPersons, type }) => {
   const [fullName, setFullName] = React.useState("")
   const [proficiency, setProficiency] = React.useState("")
   const addPerson = () => {
     let newPerson = {
       fullName: fullName,
       proficiency: proficiency
+    }
+
+    // check if name is added
+    if (fullName.length < 2) {
+      window.alert("No name was added or name is too short")
+      return;
+    }
+
+    // check if proficiency is added
+    if (proficiency.length === 0) {
+      window.alert("No Proficiency was selected")
+      return;
     }
 
     // check if room has facilitator
@@ -21,23 +33,22 @@ const Modal = ({ setModal, persons, setPersons }) => {
     // check if room has smart contract developer
     const is_server_side_present = persons.find((person) => person.proficiency === "server_side")
 
-    if (is_facilitator_present && newPerson.proficiency === "facilitator") {
+    if (is_facilitator_present && newPerson.proficiency === "facilitator" && type === "room") {
       window.alert("This Room has a facilitator present")
       return;
     }
-    if (is_frontend_present && newPerson.proficiency === "frontend") {
+    if (is_frontend_present && newPerson.proficiency === "frontend" && type === "room") {
       window.alert("This Room has a FrontEnd Developer present")
       return;
     }
-    if (is_smart_contract_present && newPerson.proficiency === "smart_contract") {
+    if (is_smart_contract_present && newPerson.proficiency === "smart_contract" && type === "room") {
       window.alert("This Room has a Smart Contract Developer present")
       return;
     }
-    if (is_server_side_present && newPerson.proficiency === "server_side") {
+    if (is_server_side_present && newPerson.proficiency === "server_side" && type === "room") {
       window.alert("This Room has a Server-Side Architect present")
       return;
     }
-
     setPersons([...persons, newPerson])
     setModal(false)
   }

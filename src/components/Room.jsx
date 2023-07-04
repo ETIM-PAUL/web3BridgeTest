@@ -1,16 +1,21 @@
 import React from 'react'
 import Modal from './Modal'
 
-const Room = ({ title }) => {
+const Room = ({ title, type }) => {
   const [persons, setPersons] = React.useState([])
   const [modal, setModal] = React.useState(false)
 
   // shows modal for adding a person to a room
   const showModal = () => {
-    if (persons.length === 4) {
+    if (persons.length === 4 && type === "room") {
       window.alert("This Room is fully occupied")
       return;
-    } else
+    }
+    if (persons.length === 500 && type === "conference room") {
+      window.alert("This Room is fully occupied")
+      return;
+    }
+    else
       setModal(true)
   }
 
@@ -41,24 +46,24 @@ const Room = ({ title }) => {
         <div className="card-body mx-auto">
           <h2 className="card-title justify-center">{title}</h2>
           <div>
-            <span className="font-bold text-sm text-start">Facilitator</span>
+            <span className="font-bold text-sm text-start">Facilitator{type === "room" ? "" : "s"}</span>
             <ul className="menu bg-base-200 w-fit rounded-box">
               {persons.length > 0 && persons.filter((person) => person.proficiency === "facilitator").map((person, index) => (
                 <li className="" key={index}><a className="hover:cursor-default">{person.fullName} - {returnRole(person.proficiency)}</a></li>
               ))}
               {persons.filter((person) => person.proficiency === "facilitator").length === 0 &&
-                <span className="text-red-600">No Facilatator in this room</span>
+                <span className="text-red-600">No Facilatator in this {type === "room" ? "room" : "conference room"}</span>
               }
             </ul>
           </div>
           <div>
-            <span className="font-bold text-sm text-start">Developers</span>
+            <span className="font-bold text-sm text-start">Developer{type === "room" ? "" : "s"}</span>
             <ul className="menu bg-base-200 w-fit mx-auto rounded-box">
               {persons.length > 0 && persons.filter((person) => person.proficiency !== "facilitator").map((person, index) => (
                 <li className="" key={index}><a className="hover:cursor-default">{person.fullName}  - {returnRole(person.proficiency)}</a></li>
               ))}
               {persons.filter((person) => person.proficiency !== "facilitator").length === 0 &&
-                <span className="text-red-600">No Developers in this room</span>
+                <span className="text-red-600">No Developers in this {type === "room" ? "room" : "conference room"}</span>
               }
             </ul>
           </div>
@@ -69,7 +74,7 @@ const Room = ({ title }) => {
       </div>
 
       {modal &&
-        <Modal modal={modal} persons={persons} setPersons={setPersons} setModal={setModal} />
+        <Modal type={type} modal={modal} persons={persons} setPersons={setPersons} setModal={setModal} />
       }
     </div>
   )
